@@ -1,10 +1,14 @@
 const express = require('express');
+const cors = require('cors');
 const getLessons = require('./getLessons');
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
+app.use(cors({
+    origin: '*'
+}))
 
 app.get('/lessons/:week', async (req, res) => {
     if (!req.params.week) return res.status(400).json({message: 'No week number'});
